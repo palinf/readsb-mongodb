@@ -62,6 +62,13 @@ Fields of the flight record in the MongoDB database include:
 ### mongo-express
 You may wish to use mongo-express for database operations. Uncomment the container part in docker-compose.yaml
 
+### examples.py
+Some examples of simple request are shown:
+
+1. Get the last flight in database
+2. Get the 10 last flights without adbs_data (locations) field.
+3. Get the last 10 records, outputing "callsign", "hex", and counting the amount of "adsb_data".
+4. Get the flights, within a user defined fence.
 
 ## Alternate ways
 
