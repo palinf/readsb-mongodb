@@ -1,0 +1,63 @@
+version: '3.3'
+
+services:
+
+  readsb2mongo:
+    build: .
+    restart: unless-stopped
+    environment:
+      MONGODB_URL: 'mongodb://root:examplerootroot@mongo:27017'
+      VERBOSE: True
+      READSB_JSONPORT_URL: ${READSB_JSONPORT_URL}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: examplerootroot
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - 27017:27017
+
+#You may wish to allow jupyter notebook to "play" with the data and the examples.
+
+#  jupyter:
+#    restart: unless-stopped
+#    image: jupyter/scipy-notebook
+#    ports:
+#      -  "10000:8888"
+#    volumes:
+#      - jupyter_home:/home/jovyan/
+#    environment:
+#      JUPYTER_ENABLE_LAB: "yes"
+#    command: "start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''"
+#
+##You may wish to use mongo-express as a client for database operations
+#  mongo_express:
+#    image: mongo-express
+#    restart: unless-stopped
+#    ports:
+#      - "28081:8081"
+#    environment:
+#      ME_CONFIG_MONGODB_SERVER: mongo
+##      ME_CONFIG_BASICAUTH_USERNAME: root
+##      ME_CONFIG_BASICAUTH_PASSWORD: examplerootroot
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: examplerootroot
+#      ME_CONFIG_MONGODB_URL: mongo://root:examplerootroot@mongo:27017/
+#    depends_on:
+#      - mongo
+
+
+volumes:
+  jupyter_home:
+  mongo_data:
+
+networks:
+  backends:
+  nginx:
+  openvpn_server:
