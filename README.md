@@ -2,6 +2,10 @@
 
 The Readsb-MongoDB project is a tool designed to process the output of the JSON port from either `readsb` or `docker-adsb-ultrafeeder` and store this data in MongoDB for long-term storage. This document serves as a guide for setting up and utilizing this solution.
 
+### Support
+
+You can find help on discord for this project, https://discord.com/channels/734090820684349521/935340681902309376
+
 ## Prerequisites
 
 To use Readsb-MongoDB, you will need either a running instance of
@@ -52,6 +56,11 @@ Fields of the flight record in the MongoDB database include:
 - `adsb_data_count`: The count of data points collected.
 - `callsign`: The callsign of the aircraft, stored as an empty array if not available.
 - `adsb_data`: An array with raw ADS-B data, each item representing a snapshot of the flight's state at a specific time.
+
+## Access the data
+
+### mongo-express
+You may wish to use mongo-express for database operations. Uncomment the container part in docker-compose.yaml
 
 
 ## Alternate ways
